@@ -10,12 +10,13 @@ var secret = require('./lib/secret');
 var client = null;
 
 var vcap = JSON.parse(process.env.VCAP_SERVICES);
-var redisCreds = vcap["p-redis"][0].credentials; 
+var redisObj = vcap["p-redis"] || vcap["rediscloud"];
+var redisCreds = redisObj[0].credentials;
 
 client = redis.createClient(redisCreds.port, redisCreds.host);
 client.auth(redisCreds.password, function (err) {
-    if (err) { 
-        throw err; 
+    if (err) {
+        throw err;
     }
 });
 
