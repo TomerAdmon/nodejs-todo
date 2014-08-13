@@ -8,16 +8,16 @@ var redis = require("redis");
 var secret = require('./lib/secret');
 
 var client = null;
-if(process.env.REDISTOGO_URL) { //heroku
-  client = require('redis-url').connect(process.env.REDISTOGO_URL); 
-} else if(config.env == "development") {
-  client = redis.createClient();
-}  else { //nodejitsu
-  client = redis.createClient(secret.redisPort, secret.redisMachine);
-  client.auth(secret.redisAuth, function (err) {
-     if (err) { throw err; }
-  });
-}
+
+var vcap = JSON.parse(process.env.VCAP_SERVICES);
+var redisCreds = vcap["p-redis"][0].credentials; 
+
+client = redis.createClient(redisCreds.port, redisCreds.host);
+client.auth(redisCreds.password, function (err) {
+    if (err) { 
+        throw err; 
+    }
+});
 
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
@@ -77,4 +77,4 @@ app.post('/todos/delete', function(req, res) {
   json(res, { });
 });
 
-server.listen(process.env.PORT || config.port);
+server.listen(process.env.VCAP_APP_PORT || 3000);
