@@ -3,6 +3,5 @@
 applications:
 - name: sample-todo
   command: node server.js
-  buildpack: nodejs_offline_buildpack
   memory: 512M
   host: universal-spy-todo
