@@ -21,7 +21,7 @@ deploy:
     - script:
         name: echo information for deploy
         code: |
-          echo $CFUSER
-          echo $CFURL
-          echo $CFSPACE
-          echo $CFORG
+          echo $cfuser
+          echo $cfurl
+          echo $cfspace
+          echo $cforg
