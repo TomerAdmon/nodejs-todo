@@ -25,3 +25,8 @@ deploy:
           echo $cfurl
           echo $cfspace
           echo $cforg
+          wget -O cf-cli 'https://cli.run.pivotal.io/stable?release=debian64&version=6.3.2&source=github-rel'
+          dpkg -i cf-cli
+          cf api $cfurl
+          cf login -u $cfuser -p $cfpass -o $cforg -s $cfspace
+          cf apps
