@@ -25,4 +25,4 @@ deploy:
           sudo dpkg -i cf-cli
           cf api $cfurl
           cf login -u $cfuser -p $cfpass -o $cforg -s $cfspace
-          cf push -f ./$cfmanifest
+          cf push
