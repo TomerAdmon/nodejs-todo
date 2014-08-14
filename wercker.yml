@@ -19,10 +19,3 @@ build:
 deploy:
   steps:
     - xchapter7x/cf-push:
-      cloudfoundry_user_name: $cfuser
-      cloudfoundry_user_pass: $cfpass
-      cloudfoundry_org: $cforg
-      cloudfoundry_space: $cfspace
-      cloudfoundry_api_url: $cfurl
-      cloudfoundry_app_name: $cfappname
-      cloudfoundry_use_manifest: true
