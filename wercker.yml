@@ -18,4 +18,4 @@ build:
 
 deploy:
   steps:
-    - xchapter7x/cf-push:
+    - cf-push:
