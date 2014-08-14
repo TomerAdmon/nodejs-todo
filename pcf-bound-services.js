@@ -37,7 +37,7 @@ boundServicesHelper.prototype.getHost = function() {
 
 boundServicesHelper.prototype.getPass = function() {
   var creds = this.getCreds();
-  return ;
+  return creds.password;
 };
 
 boundServicesHelper.prototype.getCreds = function() {
