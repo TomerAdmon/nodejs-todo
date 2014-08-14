@@ -6,15 +6,14 @@ var parseCookie = require('./lib/cookie_parser');
 var config = require('./lib/config');
 var redis = require("redis");
 var secret = require('./lib/secret');
-
+var BoundServicesHelper = require("./pcf-bound-services");
 var client = null;
+//var pRedisCreds = new BoundServicesHelper("p-redis", "universal-demo-service");
 
-var vcap = JSON.parse(process.env.VCAP_SERVICES);
-var redisObj = vcap["p-redis"] || vcap["rediscloud"];
-var redisCreds = redisObj[0].credentials;
-var port = redisCreds.port;
-var host = redisCreds.host || redisCreds.hostname;
-var pass = redisCreds.password;
+var redisCloudCreds = new BoundServicesHelper("rediscloud", "universal-demo-service");
+var port = redisCloudCreds.getPort();
+var host = redisCloudCreds.getHost();
+var pass = redisCloudCreds.getPass();
 
 client = redis.createClient(port, host);
 client.auth(pass, function (err) {
