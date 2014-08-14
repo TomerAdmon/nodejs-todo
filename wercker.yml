@@ -18,7 +18,7 @@ build:
 
 deploy:
   steps:
-    - xchapter7x/cf-push@0.0.1:
+    - xchapter7x/cf-push@0.0.2:
       cloudfoundry_user_name: $cfuser
       cloudfoundry_user_pass: $cfpass
       cloudfoundry_org: $cforg
