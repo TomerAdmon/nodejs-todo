@@ -18,11 +18,11 @@ build:
 
 deploy:
   steps:
-    - script:
-        name: echo information for deploy
-        code: |
-          wget -O cf-cli 'https://cli.run.pivotal.io/stable?release=debian64&version=6.3.2&source=github-rel'
-          sudo dpkg -i cf-cli
-          cf api $cfurl
-          cf login -u $cfuser -p $cfpass -o $cforg -s $cfspace
-          cf push
+    - xchapter7x/cf-push@0.0.1:
+      cloudfoundry_user_name: $cfuser
+      cloudfoundry_user_pass: $cfpass
+      cloudfoundry_org: $cforg
+      cloudfoundry_space: $cfspace
+      cloudfoundry_api_url: $cfurl
+      cloudfoundry_app_name: $cfappname
+      cloudfoundry_use_manifest: true
