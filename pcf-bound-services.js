@@ -12,13 +12,14 @@ boundServicesHelper.prototype.getCloudFoundryServiceVariables = function() {
 
 boundServicesHelper.prototype.getServiceInstanceMetaData = function() {
   var self = this;
+  var vcap = this.getCloudFoundryServiceVariables();
+
   return _.find(vcap[self.serviceName], function(service){
     return service.name === self.instanceName;
   });
 };
 
 boundServicesHelper.prototype.parseCredentials = function() {
-  var vcap = this.getCloudFoundryServiceVariables();
   var match = this.getServiceInstanceMetaData();
   this.credentials = match.credentials;
   return this.credentials;
