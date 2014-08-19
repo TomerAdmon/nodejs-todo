@@ -6,14 +6,13 @@ var parseCookie = require('./lib/cookie_parser');
 var config = require('./lib/config');
 var redis = require("redis");
 var secret = require('./lib/secret');
-var BoundServicesHelper = require("./pcf-bound-services");
+var BoundServicesHelper = require("cloudfoundry-services");
 var client = null;
-//var pRedisCreds = new BoundServicesHelper("p-redis", "universal-demo-service");
-
-var redisCloudCreds = new BoundServicesHelper("rediscloud", "universal-demo-service");
-var port = redisCloudCreds.getPort();
-var host = redisCloudCreds.getHost();
-var pass = redisCloudCreds.getPass();
+var redisCloud = new BoundServicesHelper("rediscloud", new RegExp("universal-demo.*","g") );
+var redisCloudCreds = redisCloud.findFirstCredential();
+var port = redisCloudCreds.port;
+var host = redisCloudCreds.hostname;
+var pass = redisCloudCreds.password;
 
 client = redis.createClient(port, host);
 client.auth(pass, function (err) {
