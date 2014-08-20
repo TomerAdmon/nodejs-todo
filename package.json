@@ -15,6 +15,7 @@
     "ejs": "~0.8.3",
     "express": "~3.0.1",
     "jasmine-node": "~1.0.26",
+    "newrelic": "^1.10.0",
     "redis": "~0.8.4",
     "underscore": "~1.4.2"
   },
