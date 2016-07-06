@@ -11,7 +11,7 @@ var client = null;
 if(process.env.REDISTOGO_URL) { //heroku
   client = require('redis-url').connect(process.env.REDISTOGO_URL); 
 } else if(config.env == "development") {
-  client = redis.createClient();
+  client = redis.createClient('6379',process.argv[2]);
 }  else { //nodejitsu
   client = redis.createClient(secret.redisPort, secret.redisMachine);
   client.auth(secret.redisAuth, function (err) {
